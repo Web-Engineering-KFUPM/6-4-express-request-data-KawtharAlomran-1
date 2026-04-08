@@ -144,7 +144,6 @@ app.get("/profile/:first/:last", (req, res) => {
 app.param("userId", (req, res, next, userId) => {
   const num = Number(userId);
 
-  // check if valid positive number
   if (isNaN(num) || num <= 0) {
     return res.status(400).json({
       ok: false,
@@ -156,7 +155,12 @@ app.param("userId", (req, res, next, userId) => {
 }); 
 
 // Route params: /users/:userId route
-
+app.get("/users/:userId", (req, res) => {
+  res.json({
+    ok: true,
+    userId: req.userIdNum
+  });
+});
 
 // Start the server by listening
 app.listen(3000, () => console.log("API running at http://localhost:3000"));
